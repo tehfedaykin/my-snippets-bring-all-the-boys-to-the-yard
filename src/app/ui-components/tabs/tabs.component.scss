@@ -1,0 +1,224 @@
+.nav {
+  padding-left: 0px;
+  margin-bottom: 0;
+  list-style: none;
+  display: block;
+  clear: both;
+  overflow: hidden;
+  border-bottom: 1px solid #f60080;
+  li {
+    float: left;
+    position: relative;
+    display: block;
+    margin: 30px 30px -1px 20px;
+    a {
+      background: #fff;
+      position: relative;
+      display: block;
+      padding: 10px 15px;
+      margin-right: 2px;
+      line-height: 1.42857143;
+      border-radius: 4px 4px 0px 0px;
+      border: solid 1px #ccc;
+      color: #555;
+      margin-bottom: -1px;
+      text-decoration: none;
+    }
+    &.active {
+      a {
+        cursor: pointer;
+        border: 1px solid #f60080;
+        border-bottom-color: transparent;
+      }
+
+    }
+  }
+}
+
+$white: #ffffff;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #6c757d !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
+
+$body-bg:                   #fff !default;
+$body-color:                $gray-900 !default;
+
+$border-width:                1px !default;
+$border-radius:               .25rem !default;
+
+$spacer: 1rem !default;
+
+$component-active-color:      $white !default;
+$component-active-bg:         theme-color("primary") !default;
+
+$nav-link-padding-y:                .5rem !default;
+$nav-link-padding-x:                1rem !default;
+$nav-link-disabled-color:           $gray-600 !default;
+
+$nav-tabs-border-color:             $gray-300 !default;
+$nav-tabs-border-width:             $border-width !default;
+$nav-tabs-border-radius:            $border-radius !default;
+$nav-tabs-link-hover-border-color:  $gray-200 $gray-200 $nav-tabs-border-color !default;
+$nav-tabs-link-active-color:        $gray-700 !default;
+$nav-tabs-link-active-bg:           $body-bg !default;
+$nav-tabs-link-active-border-color: $gray-300 $gray-300 $nav-tabs-link-active-bg !default;
+
+$nav-pills-border-radius:           $border-radius !default;
+$nav-pills-link-active-color:       $component-active-color !default;
+$nav-pills-link-active-bg:          $component-active-bg !default;
+
+$nav-divider-color:                 $gray-200 !default;
+$nav-divider-margin-y:              $spacer / 2 !default;
+
+
+// Navbar
+
+$navbar-padding-y:                  $spacer / 2 !default;
+$navbar-padding-x:                  $spacer !default;
+
+
+@mixin border-radius($radius: $border-radius, $fallback-border-radius: false) {
+    border-radius: $radius;
+
+}
+
+@mixin border-top-radius($radius) {
+    border-top-left-radius: $radius; border-top-right-radius: $radius;
+  
+}
+
+@mixin border-right-radius($radius) {
+    border-top-right-radius: $radius; border-bottom-right-radius: $radius;
+  
+}
+
+@mixin border-bottom-radius($radius) {
+    border-bottom-right-radius: $radius; border-bottom-left-radius: $radius;
+  
+}
+
+@mixin border-left-radius($radius) {
+    border-top-left-radius: $radius; border-bottom-left-radius: $radius;
+  
+}
+
+@mixin border-top-left-radius($radius) {
+    border-top-left-radius: $radius;
+}
+
+@mixin border-top-right-radius($radius) {
+    border-top-right-radius: $radius;
+}
+
+@mixin border-bottom-right-radius($radius) {
+    border-bottom-right-radius: $radius;
+}
+
+@mixin border-bottom-left-radius($radius) {
+    border-bottom-left-radius: $radius;
+}
+
+@mixin hover {
+  &:hover { @content; }
+}
+
+@mixin hover-focus {
+  &:hover,
+  &:focus {
+    @content;
+  }
+}
+
+@mixin plain-hover-focus {
+  &,
+  &:hover,
+  &:focus {
+    @content;
+  }
+}
+
+@mixin hover-focus-active {
+  &:hover,
+  &:focus,
+  &:active {
+    @content;
+  }
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+
+.nav-link {
+  display: block;
+  padding: $nav-link-padding-y $nav-link-padding-x;
+
+  @include hover-focus {
+    text-decoration: none;
+  }
+
+  // Disabled state lightens text
+  &.disabled {
+    color: $nav-link-disabled-color;
+    pointer-events: none;
+    cursor: default;
+  }
+}
+
+//
+// Tabs
+//
+
+.nav-tabs {
+  border-bottom: $nav-tabs-border-width solid $nav-tabs-border-color;
+
+  .nav-item {
+    margin-bottom: -$nav-tabs-border-width;
+  }
+
+  .nav-link {
+    border: $nav-tabs-border-width solid transparent;
+    @include border-top-radius($nav-tabs-border-radius);
+
+    @include hover-focus {
+      border-color: $nav-tabs-link-hover-border-color;
+    }
+
+    &.disabled {
+      color: $nav-link-disabled-color;
+      background-color: transparent;
+      border-color: transparent;
+    }
+  }
+
+  .nav-link.active,
+  .nav-item.show .nav-link {
+    color: $nav-tabs-link-active-color;
+    background-color: $nav-tabs-link-active-bg;
+    border-color: $nav-tabs-link-active-border-color;
+  }
+
+  .dropdown-menu {
+    // Make dropdown border overlap tab border
+    margin-top: -$nav-tabs-border-width;
+    // Remove the top rounded corners here since there is a hard edge above the menu
+    @include border-top-radius(0);
+  }
+}
+
+
+.tab-close {
+  color: gray;
+  text-align: right;
+  cursor: pointer;
+}

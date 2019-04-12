@@ -1,0 +1,154 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Leckerli+One');
+
+// generate random number
+@function randomNum($min, $max) {
+	$rand: random();
+	$randomNum: $min + floor($rand * (($max - $min) + 1));
+
+	@return $randomNum;
+}
+
+// make boxshadow string
+@function makeShadowString($posOn, $shadowColor) {
+	$shadowString: "";
+
+	@if $posOn {
+		@for $i from 1 through 10 {
+			$shadowString: $shadowString + "#{randomNum(-100, 100)}px #{randomNum(-100, 100)}px 0 0 #{$shadowColor}, ";
+		}
+	} @else {
+		@for $i from 1 through 10 {
+			$shadowString: $shadowString + "0px 0px 0px #{randomNum(5, 10)}px #{$shadowColor}, ";
+		}
+	}
+
+	$shadowString: unquote($shadowString);
+	$shadowString: str-slice($shadowString, 0, str-length($shadowString) - 2);
+
+	@return $shadowString;
+}
+
+
+@function randomColor() {
+	@return rgb(random(255), random(255), random(255))
+}
+
+@function makeRandomShadowString($posOn) {
+	$shadowString: "";
+	$shadowColor: randomColor();
+
+	@if $posOn {
+		@for $i from 1 through 10 {
+			$shadowString: $shadowString + "#{randomNum(-100, 100)}px #{randomNum(-100, 100)}px 0 0 #{$shadowColor}, ";
+		}
+	} @else {
+		@for $i from 1 through 10 {
+			$shadowString: $shadowString + "0px 0px 0px #{randomNum(5, 10)}px #{$shadowColor}, ";
+		}
+	}
+
+	$shadowString: unquote($shadowString);
+	$shadowString: str-slice($shadowString, 0, str-length($shadowString) - 2);
+
+	@return $shadowString;
+}
+
+button {
+	background: #FFC0CB;
+  border-radius: 5px;
+  border-color: #FF69B4;
+	font-size: 16px;
+	user-select: none;
+	position: relative;
+	padding: 2px 4px;
+	font-weight: 700;
+	&:active {
+		outline: none;
+    border: none;
+	}
+	&:focus {outline:0;}
+}
+
+.will-sparkle {
+  transition: box-shadow 100ms ease-in, transform 100ms ease-in;
+	box-shadow: 0 2.5rem 2rem -1.5rem rgba(#f60080, 0.5);
+  &:active {
+		transform: translateY(10px);
+		background: darken(#f60080, 5%);
+		box-shadow: 0 1.2rem 1rem -1rem rgba(#f60080, 0.7);
+	}
+	&:after {
+		content: "";
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: .2rem;
+		height: .2rem;
+		background: red;
+		border-radius: 50%;
+		box-shadow: makeShadowString(false, darken((#f60080), 5%));
+		z-index: -1;
+	}
+
+	&.isSparkling:after {
+		box-shadow: makeShadowString(true, #f60080);
+		will-change: box-shadow;
+    transition: box-shadow 350ms ease-out;
+	}
+}
+
+.special {
+	&:active {
+		transform: translateY(10px);
+		background: darken(#f60080, 5%);
+		box-shadow: 0 1.2rem 1rem -1rem rgba(#f60080, 0.7);
+	}
+	&:after {
+		content: "";
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: .2rem;
+		height: .2rem;
+		background: red;
+		border-radius: 50%;
+		box-shadow: makeRandomShadowString(false);
+		z-index: -1;
+	}
+
+	&.isSparkling:after {
+		box-shadow: makeRandomShadowString(true);
+		will-change: box-shadow;
+    transition: box-shadow 350ms ease-out;
+	}
+}
+
+.pink-glow {
+	box-shadow: 0px 0px 10px 5px rgba(#f60080, 0.7);
+	transition: box-shadow 100ms ease-out, transform 100ms ease-out;
+}
+.red-glow {
+	box-shadow: 0px 0px 10px 5px rgba(#ff0000, 0.7);
+	transition: box-shadow 100ms ease-out, transform 100ms ease-out;
+}
+.orange-glow {
+	box-shadow: 0px 0px 10px 5px rgba(#EB7D5B, 0.7);
+	transition: box-shadow 100ms ease-out, transform 100ms ease-out;
+}
+.yellow-glow {
+	box-shadow: 0px 0px 10px 5px rgba(#FED23F, 0.7);
+	transition: box-shadow 100ms ease-out, transform 100ms ease-out;
+}
+.green-glow {
+	box-shadow: 0px 0px 10px 5px rgba(#B5D33D, 0.7);
+	transition: box-shadow 100ms ease-out, transform 100ms ease-out;
+}
+.blue-glow {
+	box-shadow: 0px 0px 10px 5px rgba(#6CA2EA, 0.7);
+	transition: box-shadow 100ms ease-out, transform 100ms ease-out;
+}
+.purple-glow {
+	box-shadow: 0px 0px 10px 5px rgba(#442288, 0.7);
+	transition: box-shadow 100ms ease-out, transform 100ms ease-out;
+}
